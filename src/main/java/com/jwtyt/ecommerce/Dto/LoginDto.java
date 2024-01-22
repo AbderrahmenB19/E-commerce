@@ -1,2 +1,11 @@
-package com.jwtyt.ecommerce.Dto;public class LoginDto {
+package com.jwtyt.ecommerce.Dto;
+
+import lombok.Data;
+
+@Data
+public class LoginDto {
+    private String username;
+    private String password;
+
+
 }
