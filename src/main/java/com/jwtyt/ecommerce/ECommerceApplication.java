@@ -15,7 +15,7 @@ import java.util.List;
 public class ECommerceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ECommerceApplication.class, args);
+         SpringApplication.run(ECommerceApplication.class, args);
     }
 
 

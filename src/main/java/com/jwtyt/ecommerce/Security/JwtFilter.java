@@ -22,6 +22,7 @@ import java.io.IOException;
 
 
 public class JwtFilter extends OncePerRequestFilter {
+    public static String CURRENT_USER="";
     private final JwtGenerator jwtGenerator;
     private final CustomUserDetailsService customUserDetailsService;
     @Override
@@ -29,6 +30,7 @@ public class JwtFilter extends OncePerRequestFilter {
         String token= getJwtFromRequest(request);
         if (token !=null && jwtGenerator.validateToken(token) ){
             String username = jwtGenerator.getUsernameFormToken(token);
+            CURRENT_USER=username;
             UserDetails user = customUserDetailsService.loadUserByUsername(username);
             UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken= new UsernamePasswordAuthenticationToken(
                     user.getUsername(),user.getPassword(),user.getAuthorities());

@@ -26,13 +26,11 @@ public class SecurityConfiguration {
     private final JwtFilter jwtFilter;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
-        http.csrf(AbstractHttpConfigurer::disable).
-                exceptionHandling(e->e.authenticationEntryPoint(authenticationEntryPoint))
-                        .authorizeHttpRequests(req ->
-                        req.requestMatchers("/api/auth/**").permitAll()
-                                .anyRequest().authenticated()
-
+        http.csrf(AbstractHttpConfigurer::disable)
+                .exceptionHandling(e -> e.authenticationEntryPoint(authenticationEntryPoint))
+                .authorizeHttpRequests(req -> req
+                        .requestMatchers("/api/auth/**","/product/getAllProduct","/product/getProductDetailsById/{id}").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
